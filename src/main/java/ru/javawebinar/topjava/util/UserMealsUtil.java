@@ -28,6 +28,7 @@ public class UserMealsUtil {
         System.out.println("*** Test 2: Stream ***");
         print(getFilteredWithExceededOfStreams(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
         System.out.println("*** Test 3: One Sycle ***");
+        print(getFilteredWithExceededOneCycle(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
 //        .toLocalDate();
 //        .toLocalTime();
     }
@@ -79,6 +80,63 @@ public class UserMealsUtil {
                         p.getCalories(),
                         caloriesPerDay < sumCalories.get(p.getDateTime().toLocalDate())))
                 .collect(Collectors.toList());
+    }
+
+    public static List<UserMealWithExceed> getFilteredWithExceededOneCycle(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay){
+        mealList.sort(new Comparator<UserMeal>() {
+            @Override
+            public int compare(UserMeal o1, UserMeal o2) {
+                return o1.getDateTime().toLocalDate().compareTo(o2.getDateTime().toLocalDate());
+            }
+        });
+
+        LocalDate tempLocalDate = null;
+        int tempCalories = 0;
+        List<UserMealWithExceed> mealsTrue = new ArrayList<>();
+        List<UserMealWithExceed> mealsFalse = new ArrayList<>();
+        List<UserMealWithExceed> result = new ArrayList<>();
+
+        for(UserMeal userMeal : mealList){
+            if(tempLocalDate == null){
+                tempLocalDate = userMeal.getDateTime().toLocalDate();
+            }
+
+            if(tempLocalDate.equals(userMeal.getDateTime().toLocalDate())){
+                tempCalories += userMeal.getCalories();
+            } else {
+                if(tempCalories > caloriesPerDay){
+                    result.addAll(mealsTrue);
+                } else {
+                    result.addAll(mealsFalse);
+                }
+                mealsTrue.clear();
+                mealsFalse.clear();
+                tempCalories = userMeal.getCalories();
+                tempLocalDate = userMeal.getDateTime().toLocalDate();
+            }
+
+            if(TimeUtil.isBetween(userMeal.getDateTime().toLocalTime(), startTime, endTime)){
+                UserMealWithExceed userMealWithExceedFalse = new UserMealWithExceed(
+                        userMeal.getDateTime(),
+                        userMeal.getDescription(),
+                        userMeal.getCalories(),
+                        false);
+                mealsFalse.add(userMealWithExceedFalse);
+                UserMealWithExceed userMealWithExceedTrue = new UserMealWithExceed(
+                        userMeal.getDateTime(),
+                        userMeal.getDescription(),
+                        userMeal.getCalories(),
+                        true);
+                mealsTrue.add(userMealWithExceedTrue);
+            }
+        }
+        if(tempCalories > caloriesPerDay){
+            result.addAll(mealsTrue);
+        } else {
+            result.addAll(mealsFalse);
+        }
+
+        return result;
     }
 
     private static void print(List<UserMealWithExceed> list) {
