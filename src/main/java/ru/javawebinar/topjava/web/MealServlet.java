@@ -2,6 +2,8 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.javawebinar.topjava.dao.Dao;
+import ru.javawebinar.topjava.dao.imp.MapDaoImp;
 import ru.javawebinar.topjava.model.MealTo;
 import ru.javawebinar.topjava.util.MealsUtil;
 
@@ -19,7 +21,8 @@ public class MealServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.debug("redirect to meals");
-        List<MealTo> meals = MealsUtil.getFilteredWithExcess(MealsUtil.createData(),
+        Dao dao = new MapDaoImp();
+        List<MealTo> meals = MealsUtil.getFilteredWithExcess(dao.getAllMeals(),
                 LocalTime.of(0, 0),
                 LocalTime.of(23, 59),
                 2000);

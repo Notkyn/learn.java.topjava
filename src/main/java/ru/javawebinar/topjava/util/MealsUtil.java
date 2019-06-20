@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.util;
 
+import ru.javawebinar.topjava.data.MapStorage;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
 
@@ -99,41 +100,10 @@ public class MealsUtil {
     }
 
     private static MealTo createWithExcess(Meal meal, boolean excess) {
-        return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+        return new MealTo(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
 
     public static List<Meal> createData(){
-        return Arrays.asList(
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 12, 9, 0), "Завтрак", 50),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 12, 13, 0), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 12, 20, 0), "Ужин", 100),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 11, 8, 0), "Завтрак", 600),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 11, 13, 0), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 11, 20, 9), "Ужин", 550),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 10, 10, 0), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 10, 13, 8), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 10, 20, 0), "Ужин", 650),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 5, 10, 10), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 5, 13, 0), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 5, 20, 0), "Ужин", 750),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 4, 10, 10), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 4, 13, 0), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 4, 20, 3), "Ужин", 850),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 3, 10, 15), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 3, 13, 10), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 3, 20, 7), "Ужин", 900),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 2, 10, 20), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 2, 13, 3), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 2, 20, 5), "Ужин", 800),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 1, 10, 10), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 1, 13, 23), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 1, 20, 0), "Ужин", 700)
-        );
+        return MapStorage.getInstance().getAllMeals();
     }
 }
