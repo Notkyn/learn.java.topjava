@@ -1,14 +1,53 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Java Enterprise (Topjava)</title>
-</head>
-<body>
-<h3>Проект <a href="https://github.com/JavaWebinar/topjava" target="_blank">Java Enterprise (Topjava)</a></h3>
-<hr>
-<ul>
-    <li><a href="users">Users</a></li>
-    <li><a href="meals">Meals</a></li>
-</ul>
-</body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Java Enterprise (Topjava)</title>
+        <link rel="stylesheet" href="resources/css/style.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="header_refresh_button">
+                <a href="index.html">
+                    <div>
+                        <div class="refresh_button_img">
+                            <img src="resources/images/icon-meal.png" alt="#">
+                        </div>
+                        <div class="refresh_button_text">
+                            Подсчет калорий
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="header_nav_panel">
+                <div class="header_nav_button">RU</div>
+                <div class="header_nav_button">
+                    <a href="index.html" class="nav_button_index">
+                        <div>
+                            >>
+                        </div>
+                    </a>
+                </div>
+                <div class="header_nav_button">
+                    <label><input type="password" placeholder="Password"></label>
+                </div>
+                <div class="header_nav_button">
+                    <label><input type="text" placeholder="Email"></label>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="menu">
+                <ul>
+                    <li class="exit_button_green"><a href="#">Регистрация >></a></li>
+                    <li class="exit_button"><a href="users">Зайти как User</a></li>
+                    <li class="exit_button"><a href="meals">Зайти как Admin</a></li>
+                </ul>
+            </div>
+            <div class="content_text">
+                <p>Стек технологий:</p>
+                <p>Spring Security, Spring MVC, Spring Data JPA, Spring Security Test, Hibernate ORM, Hibernate Validator, SLF4J, Json Jackson, JSP, JSTL, Apache Tomcat, WebJars, DataTables plugin, EHCACHE, PostgreSQL, JUnit, Hamcrest, jQuery, jQuery notification, Bootstrap.</p>
+                <p>Java Enterprise проект с регистрацией/авторизацией и интерфейсом на основе ролей (USER, ADMIN). Администратор может создавать/редактировать/удалять пользователей, а пользователи - управлять своим профилем и данными (день, еда, калории) через UI (по AJAX) и по REST интерфейсу с базовой авторизацией. Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли сумма калорий за день норму (редактируемый параметр в профиле пользователя). Весь REST интерфейс покрывается JUnit тестами, используя Spring MVC Test и Spring Security Test.</p>
+            </div>
+        </div>
+    </body>
 </html>

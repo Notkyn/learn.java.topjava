@@ -1,0 +1,244 @@
+body, .header_refresh_button h3, .header_nav_button a, .content, .menu ul{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: lightgray;
+    color: white
+}
+.header{
+    background: #212529;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15%;
+    padding-right: 15%;
+    overflow: hidden;
+    width: 70%;
+}
+.header_refresh_button{
+    float: left;
+    width: 17%;
+    height: 32px;
+}
+.header_refresh_button a{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    font: 20px bold;
+    width: 100%;
+}
+.refresh_button_img{
+    float: left;
+    width: 32px;
+    height: 32px;
+}
+.refresh_button_text{
+    margin-left: 20%;
+    height: 32px;
+    line-height: 32px;
+}
+.header_nav_panel{
+    float: left;
+    width: 83%;
+    height: 32px;
+    line-height: 32px;
+    text-align: right;
+}
+.header_nav_button{
+    float: right;
+    margin-left: 1%;
+}
+.header_nav_button input{
+    height: 32px;
+    border-radius: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 200px;
+}
+.nav_button_index, .nav_button_home{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    font: 20px bold;
+}
+.nav_button_index{
+    background-color: green;
+    border: 2px green;
+}
+.nav_button_index:active{
+    background-color: lightgreen;
+    border: 2px darkgreen;
+    border-radius: 5px;
+}
+.nav_button_home{
+    background-color: blue;
+    border: 2px blue;
+}
+.nav_button_home:active{
+    background-color: royalblue;
+    border: 2px darkblue;
+    border-radius: 5px;
+}
+.nav_button_home div, .nav_button_index div{
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+.menu{
+    margin-left: 15%; padding-top: 25px; padding-bottom:25px
+}
+.exit_button, .exit_button_green {
+    display: inline;
+    margin-right: 2px;
+    text-align: center;
+}
+.exit_button a, .exit_button_green a{
+    display: inline-block;
+    padding-top: 8px;
+    width: 160px;
+    height: 30px;
+    background-color: cornflowerblue;
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+    border: 2px blue solid;
+    border-radius: 8px;
+}
+.exit_button a:hover{
+    background-color: blue;
+    border: 2px cornflowerblue solid;
+    border-radius: 8px;
+    color: white;
+}
+.exit_button a:active{
+    background-color: darkblue;
+    border: 2px cornflowerblue solid;
+    border-radius: 8px;
+    color: white;
+}
+.exit_button_green a{
+    background-color: limegreen;
+    border: 2px green solid;
+    border-radius: 8px;
+    color: black;
+}
+.exit_button_green a:hover{
+    background-color: green;
+    border: 2px limegreen solid;
+    border-radius: 8px;
+    color: white;
+}
+.exit_button_green a:active{
+    background-color: darkgreen;
+    border: 2px limegreen solid;
+    border-radius: 8px;
+    color: white;
+}
+.content_text{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15%;
+    padding-right: 15%;
+    color: black;
+    font: 20px italic;
+}
+.content_text p{
+    text-indent: 20px;
+}
+.profile_button{
+    text-decoration: none;
+    background-color: blue;
+    color: #FAFAFA;
+    border-radius: 5px;
+    width: 150px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    font: 20px bold;
+    text-align: center;
+}
+.profile_button div{
+    height: 32px;
+    line-height: 32px;
+}
+.profile_button:active{
+    background-color: royalblue;
+    border: 2px darkblue;
+    border-radius: 5px;
+}
+.content_container{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15%;
+    padding-right: 15%;
+    color: black;
+}
+.content h2{
+    text-align: center;
+}
+.add_button_container{
+    width: 100%;
+}
+.add_button{
+    text-decoration: none;
+    background-color: blue;
+    color: #FAFAFA;
+    border: 2px blue solid;
+    border-radius: 5px;
+    width: 150px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    font: 20px bold;
+    text-align: center;
+}
+.add_button:hover{
+    background-color: blue;
+    border: 2px darkblue solid;
+    border-radius: 5px;
+}
+.add_button:active{
+    background-color: royalblue;
+    border: 2px darkblue solid;
+    border-radius: 5px;
+}
+.add_button div{
+    height: 30px;
+    line-height: 30px;
+}
+.table_meal{
+    border: 1px black solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    word-break: break-all;
+}
+.table_meal td{
+    border: 1px black solid;
+    padding: 8px;
+}
+.table_meal th{
+    border: 1px black solid;
+    padding: 8px;
+}
+.table_date{
+    width: 10%;
+    text-align: center;
+}
+.table_describe{
+    padding-left: 5px;
+}
+.table_calories{
+    width: 10%;
+    text-align: center;
+}
+.table_button{
+    width: 5%;
+    text-align: center;
+}
