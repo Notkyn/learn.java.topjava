@@ -7,15 +7,6 @@
     <meta charset="UTF-8">
     <title>Java Enterprise (Topjava)</title>
     <link rel="stylesheet" href="resources/css/style.css">
-    <style>
-        .normal {
-            color: green;
-        }
-
-        .excess {
-            color: red;
-        }
-    </style>
 </head>
 <body>
 <div class="header">
@@ -51,6 +42,40 @@
     <div class="content_container">
         <h2>Моя еда</h2>
         <input type="hidden" name="id" value="${user}">
+        <div class="container_filter">
+            <form method="get" action="meals?action=filter">
+                <div class="container_value">
+                    <div class="container_value_start_date">
+                        <div>
+                            <label for="startDate">От даты</label>
+                            <input class="date" name="startDate" id="startDate" type="date">
+                        </div>
+                    </div>
+                    <div class="container_value_end_date">
+                        <div>
+                            <label for="endDate">До даты</label>
+                            <input class="date" name="endDate" id="endDate" type="date">
+                        </div>
+                    </div>
+                    <div class="container_value_start_time">
+                        <div>
+                            <label for="startTime">От времени</label>
+                            <input class="date" name="startTime" id="startTime" type="time">
+                        </div>
+                    </div>
+                    <div class="container_value_end_time">
+                        <div>
+                            <label for="endTime">До времени</label>
+                            <input class="date" name="endTime" id="endTime" type="time">
+                        </div>
+                    </div>
+                </div>
+                <div class="container_button">
+                    <button type="button" class="filter_button_cancel"><a href="meals">Отменить</a></button>
+                    <button class="filter_button_ok" type="submit">Отфильтровать</button>
+                </div>
+            </form>
+        </div>
         <div class="add_button_container">
             <a href="#" class="add_button">
                 <div>+ Добавить</div>

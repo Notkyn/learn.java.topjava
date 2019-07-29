@@ -1,10 +1,14 @@
 package ru.javawebinar.topjava.repository.inmemory;
 
+import com.sun.istack.internal.NotNull;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -34,13 +38,34 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public boolean delete(int id) {
-        return repository.remove(id) != null;
+    public Meal save(Meal meal, int userId) {
+        if (meal.isNew()) {
+            meal.setId(counter.incrementAndGet());
+            repository.put(meal.getId(), meal);
+            return meal;
+        } else if(meal.getUserId() == userId){
+            return repository.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
+        } else {
+            return null;
+        }
+    }
+
+
+    @Override
+    public boolean delete(int id, int userId) {
+        if(get(id, userId) != null){
+            return repository.remove(id) != null;
+        }
+        return false;
     }
 
     @Override
-    public Meal get(int id) {
-        return repository.get(id);
+    public Meal get(int id, int userId) {
+        if(repository.get(id).getUserId() == userId) {
+            return repository.get(id);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -56,6 +81,14 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
                 .stream()
                 .filter((meal) -> meal.getUserId() == userId)
                 .sorted(Comparator.comparing(Meal::getDate).reversed())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Meal> getUserMealsFiltered(int userId, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
+        return getUserMeals(userId)
+                .stream()
+                .filter((meal) -> DateTimeUtil.isFilter(startDate, startTime, endDate, endTime, meal.getDateTime()))
                 .collect(Collectors.toList());
     }
 

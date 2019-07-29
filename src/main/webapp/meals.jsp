@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Meal list</title>
+    <link rel="stylesheet" href="resources/css/style.css">
     <style>
         .normal {
             color: green;
@@ -21,6 +22,41 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Meals</h2>
+    <div class="container_filter">
+        <form method="get" action="meals">
+            <input type="hidden" name="action" value="filter">
+            <div class="container_value">
+                <div class="container_value_start_date">
+                    <div>
+                        <label for="startDate">От даты</label>
+                        <input class="date" name="startDate" id="startDate" type="date">
+                    </div>
+                </div>
+                <div class="container_value_end_date">
+                    <div>
+                        <label for="endDate">До даты</label>
+                        <input class="date" name="endDate" id="endDate" type="date">
+                    </div>
+                </div>
+                <div class="container_value_start_time">
+                    <div>
+                        <label for="startTime">От времени</label>
+                        <input class="date" name="startTime" id="startTime" type="time">
+                    </div>
+                </div>
+                <div class="container_value_end_time">
+                    <div>
+                        <label for="endTime">До времени</label>
+                        <input class="date" name="endTime" id="endTime" type="time">
+                    </div>
+                </div>
+            </div>
+            <div class="container_button">
+                <button type="button" class="filter_button_cancel"><a href="meals">Отменить</a></button>
+                <button class="filter_button_ok" type="submit">Отфильтровать</button>
+            </div>
+        </form>
+    </div>
     <a href="meals?action=create">Add Meal</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">

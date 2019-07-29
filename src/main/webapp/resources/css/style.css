@@ -242,3 +242,86 @@ body{
     width: 5%;
     text-align: center;
 }
+.normal {
+    color: green;
+}
+.excess {
+    color: red;
+}
+.container_filter{
+    border: 1px black solid;
+    margin-bottom: 20px;
+}
+.container_value{
+    width: 100%;
+    height: 100px;
+    border-bottom: 2px solid lightgray;
+}
+.container_button{
+    width: 100%;
+    text-align: right;
+}
+.filter_button_ok, .filter_button_cancel{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: inline-block;
+    width: 15%;
+    height: 35px;
+    line-height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    color: black;
+    font: 20px bold;
+}
+.filter_button_cancel{
+    margin-right: 1%;
+    background-color: red;
+    border: 2px solid red;
+}
+.filter_button_cancel a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    font: 20px bold;
+}
+.filter_button_ok{
+    margin-right: 5%;
+    background-color: royalblue;
+    border: 2px solid royalblue;
+}
+.filter_button_ok:active{
+    border: 2px solid lightblue;
+    border-radius: 5px;
+}
+.filter_button_cancel:active{
+    border: 2px solid lightpink;
+}
+.container_value_start_date, .container_value_end_date, .container_value_start_time, .container_value_end_time{
+    display: inline-block;
+    position: relative;
+    width: 24%;
+    margin: 0;
+    padding: 0;
+}
+.container_value_start_date div, .container_value_start_time div{
+    width: 70%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.container_value_end_date div, .container_value_end_time div{
+    width: 70%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.container_value_start_date label, .container_value_end_date label, .container_value_start_time label, .container_value_end_time label{
+    display: inline-block;
+    margin: 3%;
+}
+.date{
+    display: block;
+    width: 70%;
+    margin: 3%;
+}
