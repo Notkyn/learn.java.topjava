@@ -1,47 +1,45 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
-<head>
-    <jsp:include page="fragments/headTag.jsp"/>
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 <section>
-    <h3><a href="index.jsp">Home</a></h3>
+    <h3><a href="index.jsp"><spring:message code="app.home"/></a></h3>
     <hr/>
-    <h2>Meals</h2>
+    <h2><spring:message code="meal.title"/></h2>
     <form method="get" action="filter">
         <dl>
-            <dt>From Date:</dt>
-            <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
+            <dt><spring:message code="meal.fromDate"/></dt>
+            <dd><label><input type="date" name="startDate" value="${param.startDate}"></label></dd>
         </dl>
         <dl>
-            <dt>To Date:</dt>
-            <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
+            <dt><spring:message code="meal.toDate"/></dt>
+            <dd><label><input type="date" name="endDate" value="${param.endDate}"></label></dd>
         </dl>
         <dl>
-            <dt>From Time:</dt>
-            <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
+            <dt><spring:message code="meal.fromTime"/></dt>
+            <dd><label><input type="time" name="startTime" value="${param.startTime}"></label></dd>
         </dl>
         <dl>
-            <dt>To Time:</dt>
-            <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
+            <dt><spring:message code="meal.toTime"/></dt>
+            <dd><label><input type="time" name="endTime" value="${param.endTime}"></label></dd>
         </dl>
-        <button type="submit">Filter</button>
+        <button type="submit"><spring:message code="meal.filter"/></button>
     </form>
     <hr/>
-    <a href="createForm">Add Meal</a>
+    <a href="createForm"><spring:message code="meal.addMeal"/></a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Calories</th>
+            <th><spring:message code="meal.date"/></th>
+            <th><spring:message code="meal.description"/></th>
+            <th><spring:message code="meal.calories"/></th>
             <th></th>
             <th></th>
         </tr>
@@ -57,8 +55,8 @@
                 </td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><a href="updateForm?&id=${meal.id}">Update</a></td>
-                <td><a href="delete?id=${meal.id}">Delete</a></td>
+                <td><a href="updateForm?&id=${meal.id}"><spring:message code="meal.update"/></a></td>
+                <td><a href="delete?id=${meal.id}"><spring:message code="meal.delete"/></a></td>
             </tr>
         </c:forEach>
     </table>
