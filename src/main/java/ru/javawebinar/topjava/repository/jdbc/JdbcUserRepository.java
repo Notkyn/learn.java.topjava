@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class JdbcUserRepository implements UserRepository {
     private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
     private static final UserRowMapper USER_ROW_MAPPER = new UserRowMapper();
