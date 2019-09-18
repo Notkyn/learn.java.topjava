@@ -10,6 +10,7 @@ import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.web.SecurityUtil;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -34,10 +35,11 @@ public abstract class AbstractMealController {
         service.delete(id, userId);
     }
 
-    public List<MealTo> getAll() {
+    public List<Meal> getAll() {
         int userId = SecurityUtil.authUserId();
         log.info("getAll for user {}", userId);
-        return MealsUtil.getWithExcess(service.getAll(userId), SecurityUtil.authUserCaloriesPerDay());
+        //return MealsUtil.getWithExcess(service.getAll(userId), SecurityUtil.authUserCaloriesPerDay());
+        return service.getAll(userId);
     }
 
     public Meal create(Meal meal) {
@@ -66,5 +68,12 @@ public abstract class AbstractMealController {
 
         List<Meal> mealsDateFiltered = service.getBetweenDates(startDate, endDate, userId);
         return MealsUtil.getFilteredWithExcess(mealsDateFiltered, SecurityUtil.authUserCaloriesPerDay(), startTime, endTime);
+    }
+
+    public List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate) {
+        int userId = SecurityUtil.authUserId();
+        log.info("getBetween dates({} - {}) time({} - {}) for user {}", startDate, endDate, userId);
+
+        return service.getBetweenDates(startDate.toLocalDate(), endDate.toLocalDate(), userId);
     }
 }
