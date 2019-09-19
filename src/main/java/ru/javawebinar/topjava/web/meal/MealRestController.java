@@ -1,22 +1,37 @@
 package ru.javawebinar.topjava.web.meal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealTo;
+import ru.javawebinar.topjava.web.util.LocalDateConvert;
+import ru.javawebinar.topjava.web.util.LocalTimeConvert;
 
 import java.net.URI;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = MealRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class MealRestController extends AbstractMealController {
     final static String REST_URL = "/rest/meals";
+    private LocalDateConvert dateConvert;
+    private LocalTimeConvert timeConvert;
+
+    @Autowired
+    public void setTimeConvert(LocalTimeConvert timeConvert) {
+        this.timeConvert = timeConvert;
+    }
+
+    @Autowired
+    public void setDateConvert(LocalDateConvert dateConvert) {
+        this.dateConvert = dateConvert;
+    }
 
     @Override
     @GetMapping(value = "/{id}")
@@ -56,8 +71,14 @@ public class MealRestController extends AbstractMealController {
     }
 
     @GetMapping(value = "/filter")
-    public List<Meal> getBetween(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime start,
-                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
-        return super.getBetween(start, end);
+    public List<MealTo> getBetween(@Nullable @RequestParam String startDate,
+                                   @Nullable @RequestParam String startTime,
+                                   @Nullable @RequestParam String endDate,
+                                   @Nullable @RequestParam String endTime) {
+
+        return super.getBetween(dateConvert.convert(startDate),
+                timeConvert.convert(startTime),
+                dateConvert.convert(endDate),
+                timeConvert.convert(endTime));
     }
 }
