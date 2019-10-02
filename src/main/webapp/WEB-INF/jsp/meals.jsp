@@ -38,15 +38,15 @@
             </div>
             <div class="card-footer text-right">
                 <button class="btn btn-danger" onclick="clearFilter()">
-                    <span class="fa fa-remove">Cancel!!!!</span>
+                    <span class="fa fa-remove"> Cancel</span>
                 </button>
                 <button class="btn btn-primary" onclick="updateFilteredTable()">
-                    <span class="fa fa-filter">Filtered!!!!!</span>
+                    <span class="fa fa-filter"> Filtered</span>
                 </button>
             </div>
         </div>
 
-        <button class="btn btn-primary" onclick="add()">
+        <button class="btn btn-primary" style="margin-top: 10px" onclick="add()">
             <span class="fa fa-plus"></span>
             <spring:message code="meal.add"/>
         </button>
@@ -87,7 +87,7 @@
 
                     <div class="form-group">
                         <label for="datetimepicker" class="col-form-label"><spring:message code="meal.dateTime"/></label>
-                        <input type="text" class="form-control" id="datetimepicker" name="dateTime"
+                        <input type="text" class="form-control dateTimePicker" id="datetimepicker" name="dateTime"
                                placeholder="<spring:message code="meal.dateTime"/>">
                     </div>
 

@@ -1,3 +1,5 @@
+let formFilter = $('#filter');
+
 $(function () {
     makeEditable({
             ajaxUrl: "ajax/profile/meals/",
@@ -34,17 +36,40 @@ $(function () {
     );
 });
 
+function updateFilteredTable(){
+    $.ajax({
+        type: "GET",
+        url: context.ajaxUrl + 'filter',
+        data: formFilter.serialize()
+    }).done(function (data) {
+        context.datatableApi.clear().rows.add(data).draw();
+    });
+}
+
+function clearFilter(){
+    formFilter.find(":input").val("");
+    updateTable();
+}
 
 // Data Picker Initialization
 $('#datetimepicker').datetimepicker();
+
 $('.datePicker').datetimepicker(
     {
-        timepicker: false
+        timepicker: false,
+        format: 'Y-m-d'
     }
 );
+
 $('.timePicker').datetimepicker(
     {
         datepicker:false,
         format:'H:i'
+    }
+);
+
+$('.dateTimePicker').datetimepicker(
+    {
+        format:'Y-m-d H:i'
     }
 );
