@@ -26,6 +26,10 @@ public class UserTestData {
         assertMatch(actual, List.of(expected));
     }
 
+    public static void assertNotMatch(boolean actual, boolean expected){
+        assertThat(actual).isNotEqualTo(expected);
+    }
+
     public static void assertMatch(Iterable<User> actual, Iterable<User> expected) {
         assertThat(actual).usingElementComparatorIgnoringFields("registered", "meals").isEqualTo(expected);
     }
@@ -37,4 +41,6 @@ public class UserTestData {
     public static ResultMatcher contentJson(User expected) {
         return result -> assertMatch(readFromJsonMvcResult(result, User.class), expected);
     }
+
+
 }

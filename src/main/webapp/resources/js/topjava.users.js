@@ -40,3 +40,13 @@ $(function () {
         }
     );
 });
+
+function setCheckbox(id){
+    $.ajax({
+        url: context.ajaxUrl + 'enabled/' + id,
+        type: "POST"
+    }).done(function () {
+        updateTable();
+        successNoty("Change enabled");
+    });
+}

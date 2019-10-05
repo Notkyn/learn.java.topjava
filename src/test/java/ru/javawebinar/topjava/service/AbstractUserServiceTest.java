@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
+import org.springframework.util.Assert;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
@@ -88,5 +89,12 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     void getAll() throws Exception {
         List<User> all = service.getAll();
         assertMatch(all, ADMIN, USER);
+    }
+
+    @Test
+    void changeEnabled() throws Exception{
+        service.changeEnabled(ADMIN_ID);
+        User user = service.get(ADMIN_ID);
+        assertNotMatch(user.isEnabled(), ADMIN.isEnabled());
     }
 }
