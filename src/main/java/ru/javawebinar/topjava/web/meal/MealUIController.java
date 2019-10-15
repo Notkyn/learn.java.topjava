@@ -10,6 +10,7 @@ import ru.javawebinar.topjava.to.MealBind;
 import ru.javawebinar.topjava.util.BindingUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -32,7 +33,7 @@ public class MealUIController extends AbstractMealController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createOrUpdate(MealBind mealBind, BindingResult result) {
+    public ResponseEntity<String> createOrUpdate(@Valid MealBind mealBind, BindingResult result) {
         if (result.hasErrors()) {
             return ResponseEntity.unprocessableEntity().body(BindingUtil.responseWithErrors(result));
         }
