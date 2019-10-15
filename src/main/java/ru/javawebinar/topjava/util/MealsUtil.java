@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.util;
 
 import org.springframework.lang.Nullable;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.to.MealBind;
 import ru.javawebinar.topjava.to.MealTo;
 
 import java.time.LocalDate;
@@ -42,5 +43,16 @@ public class MealsUtil {
 
     public static MealTo createWithExcess(Meal meal, boolean excess) {
         return new MealTo(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+    }
+
+    public static Meal createNewFromBind(MealBind mealBind){
+        return new Meal(null, mealBind.getDateTime(), mealBind.getDescription(), mealBind.getCalories());
+    }
+
+    public static Meal updateFromBind(Meal meal, MealBind mealBind){
+        meal.setDateTime(mealBind.getDateTime());
+        meal.setDescription(mealBind.getDescription());
+        meal.setCalories(mealBind.getCalories());
+        return meal;
     }
 }
