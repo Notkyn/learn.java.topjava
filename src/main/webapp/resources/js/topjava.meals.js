@@ -1,5 +1,13 @@
 const mealAjaxUrl = "ajax/profile/meals/";
 
+function updateFilteredTable() {
+    $.ajax({
+        type: "GET",
+        url: "ajax/profile/meals/filter",
+        data: $("#filter").serialize()
+    }).done(updateTableByData);
+}
+
 function formatDate(date){
     return addZero(date.getDate()) + '-' + addZero(date.getMonth() + 1)
         + '-' + date.getFullYear() + ' ' + addZero(date.getHours())
@@ -12,14 +20,6 @@ function addZero(num){
     } else {
         return num;
     }
-}
-
-function updateFilteredTable() {
-    $.ajax({
-        type: "GET",
-        url: "ajax/profile/meals/filter",
-        data: $("#filter").serialize()
-    }).done(updateTableByData);
 }
 
 function clearFilter() {
@@ -81,3 +81,24 @@ $(function () {
         updateTable: updateFilteredTable
     });
 });
+
+// Data Picker Initialization
+$('.datePicker').datetimepicker(
+    {
+        timepicker: false,
+        format: 'Y-m-d'
+    }
+);
+
+$('.timePicker').datetimepicker(
+    {
+        datepicker:false,
+        format:'H:i'
+    }
+);
+
+$('.dateTimePicker').datetimepicker(
+    {
+        format:'Y-m-d H:i',
+    }
+);

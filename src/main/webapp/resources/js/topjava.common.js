@@ -21,7 +21,11 @@ function updateRow(id) {
     $("#modalTitle").html(i18n["editTitle"]);
     $.get(context.ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
-            form.find("input[name='" + key + "']").val(value);
+            if(key === "dateTime"){
+                form.find("input[name='" + key + "']").val(formatDate(new Date(value)));
+            } else {
+                form.find("input[name='" + key + "']").val(value);
+            }
         });
         $('#editRow').modal();
     });
