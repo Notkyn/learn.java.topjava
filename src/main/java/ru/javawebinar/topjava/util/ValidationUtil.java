@@ -1,14 +1,13 @@
 package ru.javawebinar.topjava.util;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import ru.javawebinar.topjava.HasId;
 import ru.javawebinar.topjava.util.exception.IllegalRequestDataException;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.validation.*;
+import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 
 public class ValidationUtil {
 
@@ -60,19 +59,14 @@ public class ValidationUtil {
         return result;
     }
 
-    public static ResponseEntity<String> getErrorResponse(BindingResult result) {
-        StringJoiner joiner = new StringJoiner("<br>");
-        result.getFieldErrors().forEach(
-                fe -> {
+    public static String[] getBindingErrorDetails(BindingResult result){
+        return result.getFieldErrors().stream()
+                .map(fe -> {
                     String msg = fe.getDefaultMessage();
-                    if (msg != null) {
-                        if (!msg.startsWith(fe.getField())) {
-                            msg = fe.getField() + ' ' + msg;
-                        }
-                        joiner.add(msg);
-                    }
-                });
-        return ResponseEntity.unprocessableEntity().body(joiner.toString());
+                    return msg == null ? null : (msg.startsWith(fe.getField())) ? msg : fe.getField() + ' ' + msg;
+                })
+                .filter(Objects::nonNull)
+                .toArray(String[]::new);
     }
 
     private static final Validator validator;

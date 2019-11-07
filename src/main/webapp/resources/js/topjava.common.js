@@ -97,10 +97,30 @@ function failNoty(jqXHR) {
     closeNoty();
     const errorInfo = JSON.parse(jqXHR.responseText);
     failedNote = new Noty({
-        text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;" + i18n["common.errorStatus"] + ": " + jqXHR.status + "<br>" + errorInfo.type + "<br>" + errorInfo.detail,
+        text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;"
+            + i18n["common.errorStatus"]
+            + ": " + jqXHR.status
+            + "<br>"
+            + errorInfo.type
+            + "<br>"
+            + detailErrorLine(errorInfo)
+            + sumArr(errorInfo.details),
         type: "error",
         layout: "bottomRight"
     }).show();
+}
+
+function detailErrorLine(err){
+    return err.details == null || err.details.length === 0
+        ? err.detail + "<br>" : "";
+}
+
+function sumArr(arr){
+    let line = "";
+    arr.forEach((item) => {
+        line += item + "<br>"
+    });
+    return line;
 }
 
 function renderEditBtn(data, type, row) {
