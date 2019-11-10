@@ -7,7 +7,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
-import ru.javawebinar.topjava.web.json.JsonUtil;
 
 import java.util.Collections;
 
@@ -85,14 +84,25 @@ class AdminRestControllerTest extends AbstractControllerTest {
     void update() throws Exception {
         User updated = new User(USER);
         updated.setName("UpdatedName");
+        updated.setPassword("newPass");
         updated.setRoles(Collections.singletonList(Role.ROLE_ADMIN));
+
         mockMvc.perform(MockMvcRequestBuilders.put(REST_URL + USER_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
-                .content(JsonUtil.writeValue(updated)))
+                .content(jsonWithPassword(updated, "newPass")))
                 .andExpect(status().isNoContent());
 
         assertMatch(userService.get(USER_ID), updated);
+    }
+
+    @Test
+    void updateWithInvalidData() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.put(REST_URL + USER_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
+                .content(jsonWithPassword(getBadUserContent(), "newPass")))
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
@@ -109,6 +119,15 @@ class AdminRestControllerTest extends AbstractControllerTest {
 
         assertMatch(returned, expected);
         assertMatch(userService.getAll(), ADMIN, expected, USER);
+    }
+
+    @Test
+    void createWithInvalidData() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
+                .content(jsonWithPassword(getBadUserContent(), "newPass")))
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test

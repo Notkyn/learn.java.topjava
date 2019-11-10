@@ -3,6 +3,7 @@ package ru.javawebinar.topjava;
 import org.springframework.test.web.servlet.ResultMatcher;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
 import java.util.List;
@@ -18,6 +19,14 @@ public class UserTestData {
 
     public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", 2005, Role.ROLE_USER);
     public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", 1900, Role.ROLE_ADMIN, Role.ROLE_USER);
+
+    public static User getBadUserContent(){
+        return new User(null, "", "", "", 1, Role.ROLE_USER);
+    }
+
+    public static UserTo getBadUserToContent(){
+        return new UserTo(null, "", "", "", 1);
+    }
 
     public static void assertMatch(User actual, User expected) {
         assertThat(actual).isEqualToIgnoringGivenFields(expected, "registered", "meals", "password");
