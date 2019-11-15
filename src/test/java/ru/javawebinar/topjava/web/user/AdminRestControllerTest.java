@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
@@ -106,6 +108,18 @@ class AdminRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @Transactional(propagation = Propagation.NEVER)
+    void updateWithDuplicateEmail() throws Exception {
+        User expected = new User(USER);
+        expected.setEmail(ADMIN.getEmail());
+        mockMvc.perform(MockMvcRequestBuilders.put(REST_URL + USER_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
+                .content(jsonWithPassword(expected, "newPass")))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
     void createWithLocation() throws Exception {
         User expected = new User(null, "New", "new@gmail.com", "newPass",  2300, Role.ROLE_USER, Role.ROLE_ADMIN);
         ResultActions action = mockMvc.perform(MockMvcRequestBuilders.post(REST_URL)
@@ -128,6 +142,17 @@ class AdminRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN))
                 .content(jsonWithPassword(getBadUserContent(), "newPass")))
                 .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    @Transactional(propagation = Propagation.NEVER)
+    void createWithDuplicateEmail() throws Exception {
+        User expected = new User(null, "New", "user@yandex.ru", "newPass",  2300, Role.ROLE_USER, Role.ROLE_ADMIN);
+        mockMvc.perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
+                .content(jsonWithPassword(expected, "newPass")))
+                .andExpect(status().isConflict());
     }
 
     @Test
